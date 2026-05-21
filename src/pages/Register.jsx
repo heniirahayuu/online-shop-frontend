@@ -21,50 +21,124 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(
-      "http://localhost:5000/api/auth/register",
-      form
-    );
+    try {
+      await axios.post(
+        "https://uptight-gossip-bobcat.ngrok-free.dev/api/auth/register",
+        form
+      );
 
-    alert("Registrasi berhasil!");
-    navigate("/login");
+      alert("Registrasi berhasil!");
+      navigate("/login");
+
+    } catch (error) {
+      alert("Registrasi gagal");
+      console.log(error);
+    }
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Register</h1>
+    <div style={styles.container}>
+      <div style={styles.card}>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nama"
-          onChange={handleChange}
-        />
-        <br /><br />
+        <h1 style={styles.title}>Register</h1>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-        />
-        <br /><br />
+        <form onSubmit={handleSubmit} style={styles.form}>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-        />
-        <br /><br />
+          <input
+            type="text"
+            name="name"
+            placeholder="Nama"
+            onChange={handleChange}
+            style={styles.input}
+          />
 
-        <button type="submit">Register</button>
-      </form>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            style={styles.input}
+          />
 
-      <p>
-        Sudah punya akun? <Link to="/login">Login</Link>
-      </p>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            style={styles.input}
+          />
+
+          <button type="submit" style={styles.button}>
+            Register
+          </button>
+
+        </form>
+
+        <p style={styles.text}>
+          Sudah punya akun?{" "}
+          <Link to="/login" style={styles.link}>
+            Login
+          </Link>
+        </p>
+
+      </div>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f4f4f4",
+  },
+
+  card: {
+    backgroundColor: "white",
+    padding: "40px",
+    borderRadius: "12px",
+    width: "350px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+  },
+
+  title: {
+    textAlign: "center",
+    marginBottom: "25px",
+  },
+
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px",
+  },
+
+  input: {
+    padding: "12px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    fontSize: "14px",
+  },
+
+  button: {
+    padding: "12px",
+    border: "none",
+    borderRadius: "8px",
+    backgroundColor: "#111827",
+    color: "white",
+    cursor: "pointer",
+    fontWeight: "bold",
+  },
+
+  text: {
+    marginTop: "20px",
+    textAlign: "center",
+    fontSize: "14px",
+  },
+
+  link: {
+    color: "#2563eb",
+    textDecoration: "none",
+  },
+};
