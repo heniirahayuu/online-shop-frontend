@@ -22,7 +22,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "https://uptight-gossip-bobcat.ngrok-free.dev/api/auth/login",
+        "https://uptight-gossip-bobcat.ngrok-free.dev/api",
         form
       );
 
